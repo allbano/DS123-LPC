@@ -19,6 +19,6 @@ void main() {
         } else {
             media=((double)soma)/((double)count);
             printf("Quantidade de entradas: %d\n",count);
-    	    printf("Média: %d\n",media);
+    	    printf("Média: %.2f\n",media);
             }
 }
