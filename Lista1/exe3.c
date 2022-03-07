@@ -10,7 +10,7 @@ printf("Apos z=++x, z=%d, x=%d\n", z, x);
 printf("Apos x=-x, x=%d\n", x);
  y++;
 printf("Apos y++, y=%d\n", y);
- x=x+y-(z--);
+ x=x+y-(--z);
 printf("Apos x=x+y-(z--):\n");
 printf("x %d \ny %d \nz %d\n",x,y,z);
 }
