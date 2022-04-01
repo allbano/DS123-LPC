@@ -8,72 +8,66 @@
 //Biblioteca do Jogo
 #include "forcalib.h"
 
+//Prototype das funções utilizadas
+void forca (int tentativa);
+void escolhePalavra(int *num) ;
+
+
 //Variáveis Globais
 char banco[10][10]= {"cachorro", "morango", "bicicleta", "curitiba", "computador", "cereal", "televisao", "faculdade", "trabalho", "girafa"};
-
-
-
-
-
-int main (void){
-
-int i;
 int num=0;
-char palavra[10];
-char tela[10];
+
+int main (void) {
+
+        int i;
+        char palavra[10];
+        char tela[10];
 
 
-srand(time(NULL)); //biblioteca time.h
-num = rand() % 10; //escolhe palavra aleatoria
-for(i=0; i<10;i++){
-palavra[i]=banco[num][i];
-}
-strcpy(tela, palavra); //grava o conteudo da char palavra em char tela
+        escolhePalavra(&num);
+        strcpy(palavra,banco[num]);
+        strcpy(tela, banco[num]);
 
 
-
-
-for (int i=0; i<strlen(tela);i++){ // transforma a palavra secreta da tela em _
-tela[i]=('_'); //ESPACO
-}
-// printf("A palavra é %s \n", tela);
-// scanf("%c", &palavra);
+        for (int i=0; i<strlen(tela);i++){ // transforma a palavra secreta da tela em _
+            tela[i]=('_'); //ESPACO
+        }
 
 
 
+        int erros = 0;
+        while(1){
+                forca(erros);
+                printf("\n Adivinhe a palavra: ");
+                for(int i=0;i<strlen(tela);i++){
+                printf("%c ",tela[i]);
+                }
 
-int erros = 0;
-while(1){
-forca(erros);
-printf("\n Adivinhe a palavra: ");
-for(int i=0;i<strlen(tela);i++){
-printf("%c ",tela[i]);
-}
 
+                printf("\nLetra: ");
+                char letra;
+                scanf(" %c", &letra);
 
-printf("\nLetra: ");
-char letra;
-scanf(" %c", &letra);
+                int letra_errada=1;
+                for(int i=0;i<strlen(palavra); i++){
+                    if(letra==palavra[i]){
+                        tela[i]=letra;
+                        letra_errada=0;
+                    }
+                }
+                if(letra_errada==1){
+                erros++;
+                }
 
-int letra_errada=1;
-for(int i=0;i<strlen(palavra); i++){
-if(letra==palavra[i]){
-tela[i]=letra;
-letra_errada=0;
-}
-}
-if(letra_errada==1){
-erros++;
-}
+                if(strcmp(tela,palavra)==0){
+                printf("Você venceu! :)");
+                break;
+                }
 
-if(strcmp(tela,palavra)==0){
-printf("Você venceu! :)");
-}
-
-if(erros==6){
-forca(erros);
-break;
-}
-}
-return 0;
+                if(erros==6){
+                forca(erros);
+                break;
+                }
+        }
+        return 0;
 }
