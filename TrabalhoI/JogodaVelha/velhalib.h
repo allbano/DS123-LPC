@@ -5,6 +5,7 @@ int jogada_usuario(int lin,int col,char jog);
 int verifica_ganhador(char jog);
 
 // Sem retorno
+void imprime_velha(char *posix);
 void inicializa_velha(char *jogv);
 void jogada_computador(char jog,int nivel);
 void escolha_simb(char *jog1, char *jog2);
@@ -96,4 +97,35 @@ void escolha_simb(char *jog1, char *jog2) {
                 printf("Opção inválida! Favor digitar corretamente a opção 'X' ou 'O' (maiúsculo ou minúsculo!)\n");
             }
           }while(valor==0);
+}
+
+void imprime_velha(char *posix){
+    int l;
+    printf("\t==== JOGO DA VELHA ====\n\n");
+    printf("\t   ");
+    for (l=0;l<3;l++){
+            // Imprime a primera linha
+            printf("  %c  ", *(posix+l));
+            l<=1 ?printf("|"):printf(" ");
+            }
+    printf("\n\t   -----------------");
+    printf("\n\t   ");
+    for (l;l<6;l++){
+            // Imprime a primera linha
+            printf("  %c  ", *(posix+l));
+            l<=4 ?printf("|"):printf(" ");
+            }
+    printf("\n\t   -----------------");
+    printf("\n\t   ");
+    for (l;l<9;l++){
+            // Imprime a primera linha
+            printf("  %c  ", *(posix+l));
+            l<=7 ?printf("|"):printf(" ");
+            }
+    printf("\n");
+
+
+
+
+
 }
