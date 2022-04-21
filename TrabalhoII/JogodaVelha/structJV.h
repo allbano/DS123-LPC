@@ -12,29 +12,29 @@ int menu();
 //Com retorno
 int mensagensJV(int num){
     char mens[][200] = {
-                    "\n====== MENU JOGO DA VELHA ======\n\n\n",
-                    "(1) Jogar contra o computador.\n",
-                    "(2) Jogar contra outro usuário.\n",
-                    "(3) Campeonato de Jogo da Velha.\n",
-                    "(0) Se quiser sair.\n",
-                    "Escolha uma das opções do Menu: ",
-
+                    "\n====== MENU JOGO DA VELHA ======\n\n\n",//0
+                    "(1) Jogar contra o computador.\n",//1
+                    "(2) Jogar contra outro usuário.\n",//2
+                    "(3) Campeonato de Jogo da Velha.\n",//3
+                    "(0) Se quiser sair.\n",//4
+                    "\nEscolha uma das opções do Menu: ",//5
+                    "\nDigite uma opção válida!!!\n"//6
                     };
     printf(mens[num]);
 
     return 0;
 }
 int entradaInteiros(int num){
-    int num,retorno=-1;
+    int res,retorno=-1;
     char letra;
     do{
         mensagensJV(num);
-        retorno = scanf("%d",&num);
+        retorno = scanf("%d",&res);
         do{
             letra=getchar();
         }while(letra !='\n');
     }while(retorno==0);
-    return num;
+    return res;
 }
 
 int menu(){
@@ -43,22 +43,24 @@ int menu(){
         for (int i=0;i<5;i++){
             mensagensJV(i);
         }
-        escolha = entradaInteiros();
+        escolha = entradaInteiros(5);
 
         //printf("O valor da escolha é: %d", escolha);
         switch(escolha){
             case 0:{
                 exit(0);
-                break;
-                }
+                break; }
             case 1:  {
                 erro=0;
                 break; }
             case 2:  {
                 erro=0;
                 break; }
+            case 3:  {
+                erro=0;
+                break; }
             default:
-                printf("\nDigite uma opção válida!!!");
+                mensagensJV(6);
         }
     }while(erro==1);
 return escolha;
