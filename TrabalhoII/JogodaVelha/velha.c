@@ -15,19 +15,13 @@ char jdv[3][3], *gg=&jdv[0][0],jg1=' ',jg2=' ';
 int jogc=0,res=0;
 
 /*  Programa Principal */
-int main(){
+void main(){
 
 //jogar_velha(gg,&jg1,&jg2,&res,&jogc);
-jogar_velha(gg,&jg1,&jg2,&res,&jogc);
-printf("\nO jogo será => usuário versus %s", (jogc==1?"computador":"usuário"));
-printf("\nJogador 1: %c", jg1);
-printf("\nJogador 2: %c", jg2);
+res=jogar_velha(gg,&jg1,&jg2,&res,&jogc);
+imprime_velha(gg);
+printf("\nO ganhodor é %c\n\n", res);
 
-
-
-
-printf("\n\n");
-return 0;
 }
 
 

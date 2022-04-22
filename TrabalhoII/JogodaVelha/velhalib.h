@@ -2,9 +2,9 @@
 // Com retorno
 
 
-int jogada_usuario(int *pos,char *jogador,char *velha);//fazendo
-int verifica_ganhador(char *jog, int *rest);
-int jogar_velha(char *velha,char *jog1, char *jog2,int *rest,int *jogc);//fazendo
+int jogada_usuario(int *pos,char *jogador,char *velha);
+int verifica_ganhador(char *jog,char *velha);
+int jogar_velha(char *velha,char *jog1, char *jog2,int *rest,int *jogc);
 
 // Sem retorno
 void imprime_velha(char *posix);
@@ -14,9 +14,8 @@ void escolha_simb(char *jog1, char *jog2);
 
 /*  Funtions */
 //Com retorno
-
 int jogar_velha(char *velha,char *jog1, char *jog2,int *rest,int *jogc){
-    int jogada,vec,cont=2,in;
+    int jogada,vec,cont=0,ganhador=0;
     char jogador=' ';
     *jogc=menu();
     escolha_simb(jog1,jog2);
@@ -24,18 +23,21 @@ int jogar_velha(char *velha,char *jog1, char *jog2,int *rest,int *jogc){
     do{
         imprime_velha(velha);
             jogador=(cont%2==0?*jog1:*jog2);
-            printf("\n Jogador '%c', digite uma posição de jogada de 1 à 9: ",jogador);
-            //jogada = corrigirLeituraInteiros();
+            if(jogador=='X'){
+                jogada = entradaInteiros(8);
+                } else {
+                    jogada = entradaInteiros(9);
+                    }
             fflush(stdin);
-            jogada=jogada-1;
+            --jogada;
             vec=jogada_usuario(&jogada,&jogador,velha);
             if(vec==0){
                 *(velha+jogada)=jogador;
                 cont++;
+                ganhador++;
             }
             if(vec==1) {
                     printf("\nPosição inválida!\n\n");
-                    jogada=-1;
                     continue;
             }
             if(vec==2){
@@ -43,16 +45,37 @@ int jogar_velha(char *velha,char *jog1, char *jog2,int *rest,int *jogc){
                     continue;
             }
             printf("\n");
+            if(ganhador>3){
+                *rest=verifica_ganhador(&jogador,velha);
+            }
       }while(*rest==0);
-    return 0;
-
+      return *rest;
 }
-int verifica_ganhador(char *jog,int *rest) {
-
-
-
-
-return *rest;
+int verifica_ganhador(char *jog,char *velha) {
+        //Verifica as linhas
+        int res=0;
+        if(*jog=='X'){
+            res=88;
+        } else {
+            res=79;
+            }
+        if((*(velha+0)==*jog) &&(*(velha+1)==*jog) && (*(velha+2)==*jog)
+           ||(*(velha+3)==*jog) &&(*(velha+4)==*jog) && (*(velha+5)==*jog)
+           ||(*(velha+6)==*jog) &&(*(velha+7)==*jog) && (*(velha+8)==*jog)){
+               return res;
+        }
+        //Verifica as colunas
+        if((*(velha+0)==*jog) &&(*(velha+3)==*jog) && (*(velha+6)==*jog)
+           ||(*(velha+2)==*jog) &&(*(velha+4)==*jog) && (*(velha+7)==*jog)
+           ||(*(velha+3)==*jog) &&(*(velha+5)==*jog) && (*(velha+8)==*jog)){
+               return res;
+        }
+        //Verifica as diagonais
+        if((*(velha+0)==*jog) &&(*(velha+4)==*jog) && (*(velha+8)==*jog)
+           ||(*(velha+2)==*jog) &&(*(velha+4)==*jog) && (*(velha+6)==*jog)){
+               return res;
+        }
+return 0;
 }
 
 int jogada_usuario(int *pos,char *jogador,char *velha){
@@ -93,8 +116,8 @@ void escolha_simb(char *jog1, char *jog2) {
         char escolha;
         int valor=0;
         do{
-            printf("\nSelecione qual caracter/símbolo o jogador '1' usará - 'X' ou 'O': ");
-            scanf("%*c%c", &escolha);
+            mensagensJV(6);
+            scanf("%c%*c", &escolha);
             escolha = toupper(escolha);
             switch(escolha){
             case 'X':{
@@ -110,7 +133,7 @@ void escolha_simb(char *jog1, char *jog2) {
                 break;
                 }
             default:
-                printf("Opção inválida! Favor digitar corretamente a opção 'X' ou 'O' (maiúsculo ou minúsculo!)\n");
+                mensagensJV(7);
             }
           }while(valor==0);
 }
