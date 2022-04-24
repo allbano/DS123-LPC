@@ -1,19 +1,11 @@
-/*  Prototype Funtions */
-// Com retorno
-
-int jogar_velha(char *velha,char *jog1, char *jog2,int *rest,int *jogc);
-int verifica_ganhador(char *jog,char *velha);
-int jogada_usuario(int *pos,char *jogador,char *velha);
-int entradaInteiros();
-int menu();
-
-
-// Sem retorno
-void imprime_velha(char *posix);
-void inicializa_velha(char *velha);
-void jogada_computador(char jog,int nivel);
-void escolha_simb(char *jog1, char *jog2);
-void mensagensJV(int num);
+/*  Bibliotecas Base */
+#include <stdio.h>
+#include <stdlib.h>
+/*  Bibliotecas Específicas */
+#include <ctype.h>
+#include <locale.h>
+#include <string.h>
+#include "libvelha.h"
 
 /*  Funtions */
 //Com retorno
@@ -37,7 +29,7 @@ int jogar_velha(char *velha,char *jog1, char *jog2,int *rest,int *jogc){
             if(vec==0){
                 *(velha+jogada)=jogador;
                 cont++;
-                ganhador++;
+                ++ganhador;
             }
             if(vec==1) {
                     printf("\nPosição inválida!\n\n");
@@ -48,31 +40,33 @@ int jogar_velha(char *velha,char *jog1, char *jog2,int *rest,int *jogc){
                     continue;
             }
             printf("\n");
-            if(ganhador>3){
+            if(ganhador>=5){
                 *rest=verifica_ganhador(&jogador,velha);
             }
       }while(*rest==0);
       return *rest;
 }
 int verifica_ganhador(char *jog,char *velha) {
-        //Verifica as linhas
-        int res=0;
+        int res=0,ganhou=0,l=0;
         if(*jog=='X'){
             res=88;
         } else {
             res=79;
             }
-        if((*(velha+0)==*jog) &&(*(velha+1)==*jog) && (*(velha+2)==*jog)
-           ||(*(velha+3)==*jog) &&(*(velha+4)==*jog) && (*(velha+5)==*jog)
-           ||(*(velha+6)==*jog) &&(*(velha+7)==*jog) && (*(velha+8)==*jog)){
-               return res;
-        }
+        //Verifica as linhas
+        if((*(velha+0)==*jog) &&(*(velha+1)==*jog) && (*(velha+2)==*jog))
+            { return res; }
+        if((*(velha+3)==*jog) &&(*(velha+4)==*jog) && (*(velha+5)==*jog))
+            { return res; }
+        if((*(velha+6)==*jog) &&(*(velha+7)==*jog) && (*(velha+8)==*jog))
+            { return res; }
         //Verifica as colunas
-        if((*(velha+0)==*jog) &&(*(velha+3)==*jog) && (*(velha+6)==*jog)
-           ||(*(velha+2)==*jog) &&(*(velha+4)==*jog) && (*(velha+7)==*jog)
-           ||(*(velha+3)==*jog) &&(*(velha+5)==*jog) && (*(velha+8)==*jog)){
-               return res;
-        }
+        if((*(velha+0)==*jog) &&(*(velha+3)==*jog) && (*(velha+6)==*jog))
+            { return res; }
+        if((*(velha+1)==*jog) &&(*(velha+4)==*jog) && (*(velha+7)==*jog))
+            { return res; }
+        if((*(velha+2)==*jog) &&(*(velha+5)==*jog) && (*(velha+8)==*jog))
+            { return res; }
         //Verifica as diagonais
         if((*(velha+0)==*jog) &&(*(velha+4)==*jog) && (*(velha+8)==*jog)
            ||(*(velha+2)==*jog) &&(*(velha+4)==*jog) && (*(velha+6)==*jog)){
