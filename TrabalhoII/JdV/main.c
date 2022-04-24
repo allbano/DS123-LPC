@@ -1,6 +1,19 @@
 #include <stdio.h>
 /*  Bibliotecas do Jogo */
 #include "libvelha.h"
+#include "libcampeonato.h"
+
+/*  Estruturas Globais */
+/* Estruturas Globais */
+typedef struct jogador {
+    char jog[15],simb[1];
+} jogs;
+typedef struct {
+    int partida;
+    char jdv[3][3];
+    char resultado[1];
+} velha;
+
 
 /*  Variáveis Globais */
 char jdv[3][3], *gg=&jdv[0][0],jg1=' ',jg2=' ';

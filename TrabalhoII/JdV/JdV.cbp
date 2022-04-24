@@ -31,6 +31,15 @@
 		<Compiler>
 			<Add option="-Wall" />
 		</Compiler>
+		<Unit filename="campeonato.h" />
+		<Unit filename="libcampeonato.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="libcampeonato.h" />
+		<Unit filename="libvelha.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="libvelha.h" />
 		<Unit filename="main.c">
 			<Option compilerVar="CC" />
 		</Unit>
