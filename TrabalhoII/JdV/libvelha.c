@@ -16,7 +16,8 @@ int jogar_velha(char *velha,char *jog1, char *jog2,int *rest,int *jogc){
     escolha_simb(jog1,jog2);
     inicializa_velha(velha);
     do{
-        imprime_velha(velha);
+        //system("clear");
+            imprime_velha(velha);
             jogador=(cont%2==0?*jog1:*jog2);
             if(jogador=='X'){
                 jogada = entradaInteiros(8);
@@ -47,31 +48,34 @@ int jogar_velha(char *velha,char *jog1, char *jog2,int *rest,int *jogc){
       return *rest;
 }
 int verifica_ganhador(char *jog,char *velha) {
-        int res=0,ganhou=0,l=0;
+        int res=0;
         if(*jog=='X'){
             res=88;
         } else {
             res=79;
             }
         //Verifica as linhas
-        if((*(velha+0)==*jog) &&(*(velha+1)==*jog) && (*(velha+2)==*jog))
+        if(((*(velha+0)==*jog) &&(*(velha+1)==*jog) && (*(velha+2)==*jog)) ||
+            ((*(velha+3)==*jog) &&(*(velha+4)==*jog) && (*(velha+5)==*jog))||
+            ((*(velha+6)==*jog) &&(*(velha+7)==*jog) && (*(velha+8)==*jog)))
             { return res; }
-        if((*(velha+3)==*jog) &&(*(velha+4)==*jog) && (*(velha+5)==*jog))
-            { return res; }
-        if((*(velha+6)==*jog) &&(*(velha+7)==*jog) && (*(velha+8)==*jog))
-            { return res; }
+
         //Verifica as colunas
-        if((*(velha+0)==*jog) &&(*(velha+3)==*jog) && (*(velha+6)==*jog))
+        if(((*(velha+0)==*jog) &&(*(velha+3)==*jog) && (*(velha+6)==*jog)) ||
+          ((*(velha+1)==*jog) &&(*(velha+4)==*jog) && (*(velha+7)==*jog))  ||
+          ((*(velha+2)==*jog) &&(*(velha+5)==*jog) && (*(velha+8)==*jog)))
             { return res; }
-        if((*(velha+1)==*jog) &&(*(velha+4)==*jog) && (*(velha+7)==*jog))
-            { return res; }
-        if((*(velha+2)==*jog) &&(*(velha+5)==*jog) && (*(velha+8)==*jog))
-            { return res; }
+
         //Verifica as diagonais
         if((*(velha+0)==*jog) &&(*(velha+4)==*jog) && (*(velha+8)==*jog)
-           ||(*(velha+2)==*jog) &&(*(velha+4)==*jog) && (*(velha+6)==*jog)){
-               return res;
-        }
+           ||(*(velha+2)==*jog) &&(*(velha+4)==*jog) && (*(velha+6)==*jog))
+           { return res;}
+        //Verifica o empate
+        if((*(velha+0)!=' ') && (*(velha+1)!=' ') && (*(velha+2)!=' ') &&
+           (*(velha+3)!=' ') && (*(velha+4)!=' ') && (*(velha+5)!=' ') &&
+           (*(velha+6)!=' ') && (*(velha+7)!=' ') && (*(velha+8)!=' '))
+                { return 86; }
+
 return 0;
 }
 int jogada_usuario(int *pos,char *jogador,char *velha){

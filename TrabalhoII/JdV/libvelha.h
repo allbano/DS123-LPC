@@ -19,4 +19,8 @@ void escolha_simb(char *jog1, char *jog2);
 void mensagensJV(int num);
 
 
+
+
+//quando passar o campo simb passar como endereço!!!!
+// &(b->simb)
 #endif // LIBVELHA_H_INCLUDED
