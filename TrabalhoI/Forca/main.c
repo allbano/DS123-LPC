@@ -10,12 +10,12 @@
 
 //Prototype das funções utilizadas
 void forca (int tentativa);
-void escolhePalavra(int *num) ;
+void escolhePalavra(int *num);
 
 
 //Variáveis Globais
-char banco[10][10]= {"cachorro", "morango", "bicicleta", "curitiba", "computador", "cereal", "televisao", "faculdade", "trabalho", "girafa"};
-int num=0;
+char banco[10][10]= {"cachorro", "morango", "bicicleta", "curitiba","computador", "cereal", "televisao", "faculdade", "trabalho", "girafa"};
+int num=6;
 
 int main (void) {
 
@@ -24,7 +24,7 @@ int main (void) {
         char tela[10];
 
 
-        escolhePalavra(&num);
+        //escolhePalavra(&num);
         strcpy(palavra,banco[num]);
         strcpy(tela, banco[num]);
 

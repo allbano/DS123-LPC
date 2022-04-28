@@ -2,9 +2,7 @@
 
 //Prototype Functions
 void forca(int tentativa);
-void escolhePalavra(int *num) ;
-
-
+void escolhePalavra(int *num);
 
 
 //Functions
