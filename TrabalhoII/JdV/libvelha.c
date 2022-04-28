@@ -9,10 +9,10 @@
 
 /*  Funtions */
 //Com retorno
-int jogar_velha(char *velha,char *jog1, char *jog2,int *rest,int *jogc){
+int jogar_velha(char *velha,char *jog1, char *jog2,int *rest){
     int jogada,vec,cont=0,ganhador=0;
     char jogador=' ';
-    *jogc=menu();
+//    *jogc=menu();
     escolha_simb(jog1,jog2);
     inicializa_velha(velha);
     do{
