@@ -81,3 +81,36 @@ void inicializa_jogador(jogs *jds, int jog) {
     scanf("%s%*c",jds->jog);
     setbuf(stdin,NULL);
 }
+
+/*
+
+
+        for(int l=0;l<15;l++){
+            *(&(jds+0)->jog[l])='0';
+            }
+             *(&(jds+0)->simb)='0';
+
+
+
+
+
+
+
+
+
+*jogadores->simb='0';
+        *partidas->partida=0;
+        int l;
+        for (l=0;l<9;l++){
+                *(partidas->jdv+l)='0';
+
+        }
+        *partidas->resultado='0';
+
+
+
+
+
+
+
+        */

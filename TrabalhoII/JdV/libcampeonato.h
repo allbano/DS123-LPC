@@ -13,8 +13,6 @@ typedef struct {
 // Com retorno
 char jogar_partida(velha *pv,jogs *jds);
 int grava_jogadores(jogs *jogadores,FILE *dados);
-
-
 // Sem retorno
 void inicializa_jogador(jogs *jds, int jog);
 
