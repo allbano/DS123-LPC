@@ -4,25 +4,13 @@
 #include "libvelha.h"
 #include "libcampeonato.h"
 
+/*  Escopo Global */
 /*  Estruturas Globais */
-/* Estruturas Globais */
-typedef struct jogador {
-    char jog[15],simb;
-} jogs;
-typedef struct {
-    int partida;
-    char jdv[3][3];
-    char resultado;
-} velha;
-
-
+jogs jg[2],*jd=&jg[0]; //Struct para gravar no TXT
+velha v,*vf=&v; //Structs para gravar no arquivo binário Jogo da Velha
 /*  Variáveis Globais */
-
-jogs jg[2],*jd=&jg[0]; //Structs usada no Trabalho II
-
-
-velha v,*vf=&v;
-int jogc=0,res=0;
+int jogc=0,res=0,countp=0;
+FILE *jogos,*js;
 
 /*  Programa Principal */
 int main(){
@@ -30,21 +18,36 @@ int main(){
 do {
     jogc=menu();
     switch(jogc){
-        case 1:
+         case 1:
             res=jogar_velha(&(vf->jdv[0][0]),&((jd+0)->simb),&((jd+1)->simb),&res);
             system("clear");
             imprime_velha(&(vf->jdv[0][0]));
             if((res==88) || res==79){
-                    printf("\nO ganhodor é o símbolo: -> %c <-\n\n", res);
+                    printf("\nO ganhador é o símbolo: -> %c <-\n\n", res);
                 } else {
                     printf("\nDeu empate: -> %c <-\n\n", res);
                 }
             break;
+        case 2:
+            for(int i=0;i<2;i++)
+                { inicializa_jogador((jd+i),i+1); }
+            escolha_simb(&((jd+0)->simb),&((jd+1)->simb));
+            vf->resultado=jogar_partida(vf,jd);
+            printf("Jogador 1: %s(%c)\n",jd->jog,jd->simb);
+            printf("Jogador 2: %s(%c)\n",(jd+1)->jog,(jd+1)->simb);
+            grava_jogadores(jd,js);
+            if(vf->resultado=='V'){
+                    printf("\nDeu empate: -> %c <-\n\n", res);
+                }
+            if(vf->resultado==jd->simb){
+                printf("\nO ganhador foi: -> %s(%c) <-\n\n",jd->jog,vf->resultado);
+            }
+            if(vf->resultado==(jd+1)->simb) {
+                printf("\nO ganhador foi: -> %s(%c) <-\n\n",(jd+1)->jog,vf->resultado);
+                }
 
+            break;
     }
-}while(jogc==0);
-//res=jogar_velha(gg,&jg1,&jg2,&res,&jogc);
-
-
+    }while(jogc==0);
 return 0;
 }
