@@ -84,7 +84,7 @@ int grava_partida(char *arquivo,velha *pv){
         printf("Erro ao criar o arquivo com os dados da partida!\n");
         return 0;
         }
-        fwrite(pv,sizeof(velha),1,jogo);
+        fwrite(pv,sizeof(struct jogodavelha),1,jogo);
 
      fclose(jogo);
 return 1;
@@ -104,14 +104,14 @@ return tam;
 /* Com retorno de tipo definidos pelo usuário */
 velha ler_partida(char *arquivo,int num){
     FILE *jogo;
-    velha p;
+    velha p,*pp=&p;
     jogo = fopen(arquivo,"rb");
     if(jogo == NULL){
         printf("Erro ao ler o arquivo com os dados da partida!\n");
         exit(1);
         }
     fseek(jogo,num*sizeof(velha),SEEK_SET);
-    fread(&p,sizeof(velha),1,jogo);
+    fread(pp,sizeof(velha),1,jogo);
     fclose(jogo);
 return p;
 }
@@ -206,10 +206,10 @@ void zera_partida(velha *pv){
     pv->resultado=' ';
 }
 void imprime_resultado_partida(velha *vf, jogs *jd){
-    printf("RESULTADO DA PARTIDA\t-> %i <-\n\n",vf->partida);
+    printf("\tRESULTADO DA PARTIDA\n\t\t-> %i <-\n\n",vf->partida+1);
     imprime_velha(&(vf->jdv[0][0]));
-    printf("\n\nJogador 1 -> %s(%c) <-\t versus\t",jd->jog,jd->simb);
-    printf("Jogador 2 -> %s(%c) <-\n\n",(jd+1)->jog,(jd+1)->simb);
+    printf("\n\n\tJogador 1 -> %s(%c) <-\n\t\t   VERSUS\n",jd->jog,jd->simb);
+    printf("\tJogador 2 -> %s(%c) <-\n\n",(jd+1)->jog,(jd+1)->simb);
 
 
             if(vf->resultado=='V'){
@@ -222,17 +222,63 @@ void imprime_resultado_partida(velha *vf, jogs *jd){
                 printf("\nO ganhador da partida %d foi: -> %s(%c) <-\n\n",vf->partida+1,(jd+1)->jog,vf->resultado);
                 }
 }
-void imprime_resultado_campeonato(char *bin,char *players,jogs *jd,velha *vf,int *contO,int *contX) {
-//Variáveis
+void imprime_resultado_campeonato(char *bin,char *players,jogs *jd,velha vf,int *np) {
+    //Variáveis
+    int contO=0,contX=0,contV=0,p=0;
+    velha *v=&vf;
+    FILE *f;
+    f=fopen(bin,"r");
+    if(f == NULL){
+        printf("Erro ao ler o arquivo com os dados da partida!\n");
+        system("pause");
+        exit(1);
+        }
+    //while
 
-//Chamada de funções
-//le_jogadores(jd,players);
-//ler_partida(bin,1);
+    le_jogadores(jd,players);
+    for(int i=0;i<(*np+1);i++){
+        vf=ler_partida(bin,i);
 
-printf("Está dando certo!!!");
-
+        switch(v->resultado){
+            case 'X':{++contX; break;}
+            case 'O':{++contO; break;}
+        }
+        imprime_resultado_partida(v,jd);
+    }
+    if(contX==contO){
+        printf("\n ===NÁO HOUVE GANHADORES, DEU EMPATE TÉCNICO === #triste");
+            if((jd->simb=='X') ) {
+                printf("\n\n\tJogador 1 -> %s(%c) (%i) <-\n\t\t   VERSUS\n",jd->jog,jd->simb,contX);
+                printf("\tJogador 2 -> %s(%c) (%i) <-\n\n",(jd+1)->jog,(jd+1)->simb,contO);
+                } else {
+                    printf("\n\n\tJogador 1 -> %s(%c) (%i) <-\n\t\t   VERSUS\n",jd->jog,jd->simb,contO);
+                    printf("\tJogador 2 -> %s(%c) (%i) <-\n\n",(jd+1)->jog,(jd+1)->simb,contX);
+                }
+        fclose(f);
+        exit(0);
+    }
+    if((jd->simb=='X') ) {
+        printf("\t=== PLACAR FINAL ===");
+        printf("\n\n\tJogador 1 -> %s(%c) (%i) <-\n\t\t   VERSUS\n",jd->jog,jd->simb,contX);
+        printf("\tJogador 2 -> %s(%c) (%i) <-\n\n",(jd+1)->jog,(jd+1)->simb,contO);
+        printf("\n\n%s foi o(a) grande campeã(o) do Campeonato de Jogo da Velha!!!\n\n",jd->jog);
+    } else {
+        printf("\t\t=== PLACAR FINAL ===");
+        printf("\n\n\tJogador 1 -> %s(%c) (%i) <-\n\t\t   VERSUS\n",jd->jog,jd->simb,contO);
+        printf("\tJogador 2 -> %s(%c) (%i) <-\n\n",(jd+1)->jog,(jd+1)->simb,contX);
+        printf("\n\n%s foi o(a) grande campeã(o) do Campeonato de Jogo da Velha!!!\n\n",(jd+1)->jog);
+    }
+    fclose(f);
 
 }
+
+
+
+
+
+
+
+
 
 
 

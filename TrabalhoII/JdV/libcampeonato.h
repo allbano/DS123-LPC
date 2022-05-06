@@ -4,7 +4,7 @@
 typedef struct jogador {
     char jog[15],simb;
 } jogs;
-typedef struct {
+typedef struct jogodavelha {
     int partida;
     char jdv[3][3];
     char resultado;
@@ -25,7 +25,7 @@ void inicializa_jogador(jogs *jds, int jog);
 void le_jogadores(jogs *jg,char *jds);
 void zera_partida(velha* pv);
 void imprime_resultado_partida(velha *pv, jogs *jds);
-//void imprime_resultado_partida_arquivo();
-void imprime_resultado_campeonato(char *bin,char *players,jogs *jd,velha *vf,int *contO,int *contX);
+
+void imprime_resultado_campeonato(char *bin,char *players,jogs *jd,velha vf,int *np);
 
 #endif // CAMPEONATO_H_INCLUDED

@@ -17,7 +17,7 @@ velha v,*vf=&v;
 char *binario,*jogadores;
 
 /*  Variáveis Globais */
-int jogc=0,res=0,np=0,fim=1,tam,contO,contX;
+int jogc=0,res=0,np=0,fim=1,tam;
 
 /*  Programa Principal */
 int main(void){
@@ -53,8 +53,8 @@ int main(void){
             strcat(strcpy(binario,jd->jog),(jd+1)->jog);
             strcat(jogadores,".txt");
             strcat(binario,".bin");
-            printf("Arquivo Jogadores: %s\n\n",jogadores);
-            printf("Arquivo Partidas: %s\n\n",binario);
+            printf("\nArquivo Jogadores: %s",jogadores);
+            printf("\nArquivo Partidas: %s\n",binario);
             //Faz a escolha dos símbolos
             escolha_simb(&((jd+0)->simb),&((jd+1)->simb));
             do {
@@ -78,6 +78,7 @@ int main(void){
                         //Caso 2 limpa tudo que está em memória e sai do laço
                     case 2:{
                         fim=0;
+                        printf("Partidas jogadas -> %d <-\n\n", np+1);
                         zera_tudo(jd,vf);
                         break;
                         }
@@ -86,7 +87,7 @@ int main(void){
                 }while(fim!=0);
             //Função Principal, onde imprime através dos dados dos arquivos
             // binario e txt os resultados obtidos pelos jogadores no campeonato
-            imprime_resultado_campeonato(binario,jogadores,jd,vf,&contO,&contX);
+            imprime_resultado_campeonato(binario,jogadores,jd,v,&np);
             free(binario);
             free(jogadores);
             break;
