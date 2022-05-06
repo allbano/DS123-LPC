@@ -206,23 +206,44 @@ void zera_partida(velha *pv){
     pv->resultado=' ';
 }
 void imprime_resultado_partida(velha *vf, jogs *jd){
-    printf("Resultado da partida %i",vf->partida);
-    printf("Jogador 1: %s(%c)\n",jd->jog,jd->simb);
-    printf("Jogador 2: %s(%c)\n",(jd+1)->jog,(jd+1)->simb);
+    printf("RESULTADO DA PARTIDA\t-> %i <-\n\n",vf->partida);
     imprime_velha(&(vf->jdv[0][0]));
+    printf("\n\nJogador 1 -> %s(%c) <-\t versus\t",jd->jog,jd->simb);
+    printf("Jogador 2 -> %s(%c) <-\n\n",(jd+1)->jog,(jd+1)->simb);
+
 
             if(vf->resultado=='V'){
-                    printf("\nDeu empate: -> %c <-\n\n", vf->resultado);
+                    printf("\nDeu Velha: -> %c <-\n\n", vf->resultado);
                 }
             if(vf->resultado==jd->simb){
-                printf("\nO ganhador da partida %d foi: -> %s(%c) <-\n\n",vf->partida,jd->jog,vf->resultado);
+                printf("\nO ganhador da partida %d foi: -> %s(%c) <-\n\n",vf->partida+1,jd->jog,vf->resultado);
             }
             if(vf->resultado==(jd+1)->simb) {
-                printf("\nO ganhador da partida %d foi: -> %s(%c) <-\n\n",vf->partida,(jd+1)->jog,vf->resultado);
+                printf("\nO ganhador da partida %d foi: -> %s(%c) <-\n\n",vf->partida+1,(jd+1)->jog,vf->resultado);
                 }
 }
-void imprime_resultado_campeonato(){
+void imprime_resultado_campeonato(char *bin,char *players,jogs *jd,velha *vf,int *contO,int *contX) {
+//Variáveis
 
-printf("Está funcionando!");
+//Chamada de funções
+//le_jogadores(jd,players);
+//ler_partida(bin,1);
+
+printf("Está dando certo!!!");
+
+
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
 
